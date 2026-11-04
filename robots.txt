@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://legaltechleaguefgvrj-cmd.github.io/sitemap.xml

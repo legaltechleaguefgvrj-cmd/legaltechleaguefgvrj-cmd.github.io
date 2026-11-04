@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Legal Tech League da FGV Direito Rio: liga acadêmica de estudos em direito e tecnologia. Pesquisas sobre IA e regulação, proteção de dados, infraestrutura digital, propriedade intelectual e startups.">
+<link rel="canonical" href="https://legaltechleaguefgvrj-cmd.github.io/">
+<meta property="og:title" content="Legal Tech League · FGV Direito Rio">
+<meta property="og:description" content="Liga acadêmica de estudos em direito e tecnologia da FGV Direito Rio.">
+<meta property="og:image" content="https://legaltechleaguefgvrj-cmd.github.io/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
+<title>Legal Tech League FGV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: identidade do Instagram da LTL — blocos azuis com moldura fina branca, títulos em caixa alta pesada, selo "LEGAL TECH LEAGUE", malha de rede ao fundo */
+:root {
+  --paper: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #15181e;
+  --muted: #5d636e;
+  --graphite: #66696f;
+  --rule: #dde1e7;
+  --blue: #118bf0;
+  --cyan: #14d6f8;
+  --accent: #0f7ee0;
+  --accent-soft: #e3f1fe;
+  --grad: linear-gradient(120deg, #0f84ea 0%, #1aa6fb 55%, #19d4f7 100%);
+  --display: "Montserrat", "Arial Black", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1116; --surface: #161a21; --ink: #e8ebf0; --muted: #9ba3af; --graphite: #3a3e45;
+    --rule: #272c35; --accent: #4cb4ff; --accent-soft: #12263b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1116; --surface: #161a21; --ink: #e8ebf0; --muted: #9ba3af; --graphite: #3a3e45;
+  --rule: #272c35; --accent: #4cb4ff; --accent-soft: #12263b; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; text-wrap: balance; line-height: 1.1; margin: 0; }
+h2 { text-transform: uppercase; letter-spacing: .01em; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+.sr { position: absolute; left: -9999px; }
+
+/* Selo igual ao dos posts */
+.pill { display: inline-block; font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; background: #fff; color: #6b6f76; padding: 5px 12px; border-radius: 999px; }
+
+/* Cabeçalho */
+header.top { border-bottom: 1px solid var(--rule); background: var(--surface); position: sticky; top: 0; z-index: 5; }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.brand img { height: 30px; width: auto; display: block; }
+.brand-name { font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .02em; text-transform: uppercase; line-height: 1.1; }
+.brand-name small { display: block; font-family: var(--body); font-weight: 400; text-transform: none; font-size: 12px; color: var(--muted); letter-spacing: 0; }
+nav.main { display: flex; gap: 20px; flex-wrap: wrap; }
+nav.main a { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; }
+nav.main a:hover { color: var(--accent); }
+
+/* Abertura: bloco azul com moldura, como os posts */
+.hero { padding: 28px 0 8px; }
+.panel { position: relative; background: var(--grad); color: #fff; border-radius: 6px; overflow: hidden; padding: 30px; }
+.panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .35; }
+.frame { position: relative; border: 1.5px solid rgba(255,255,255,.85); padding: 44px 36px 30px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 36px; align-items: end; }
+.frame h1 { font-size: clamp(32px, 5.2vw, 60px); text-transform: uppercase; letter-spacing: -.005em; }
+.frame h1 span { color: #0b2a4a; }
+.frame p { margin: 18px 0 22px; max-width: 54ch; font-size: 17px; color: rgba(255,255,255,.95); }
+.series { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.45); padding: 16px 18px; font-size: 14px; border-radius: 4px; }
+.series b { display: block; font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .05em; margin-bottom: 6px; }
+
+/* Seções */
+section.block { padding: 48px 0; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.block-head h2 { font-size: clamp(24px, 3.4vw, 32px); }
+.block-head h2 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.count { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Filtros */
+.filters { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.filters input { flex: 1 1 240px; padding: 11px 14px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); font: inherit; font-size: 15px; border-radius: 6px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 13px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 999px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* Lista de pesquisas */
+.papers { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.paper { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 22px 24px; background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: 6px; }
+.paper .id { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.paper .id span { display: block; }
+.paper .id span:first-child { color: var(--accent); font-weight: 500; }
+.paper h3 { font-size: 20px; font-weight: 700; line-height: 1.25; }
+.paper h3 a { color: var(--ink); text-decoration: none; }
+.paper h3 a:hover { color: var(--accent); }
+.paper .authors { font-size: 14px; color: var(--muted); margin: 6px 0 8px; }
+.paper .abstract { margin: 0; max-width: 70ch; font-size: 15px; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.tag { font-size: 12px; font-weight: 500; padding: 2px 9px; background: var(--accent-soft); color: var(--accent); border-radius: 999px; }
+.example { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border: 1px dashed var(--muted); padding: 1px 6px; border-radius: 3px; margin-left: 8px; vertical-align: 3px; white-space: nowrap; }
+.empty { padding: 24px; color: var(--muted); background: var(--surface); border-radius: 6px; }
+
+/* Sobre: bloco grafite como os posts cinza */
+.dark-band { background: var(--graphite); color: #fff; }
+.dark-band .wrap { padding-top: 52px; padding-bottom: 52px; }
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.about h2 { font-size: clamp(24px, 3.4vw, 32px); margin-bottom: 18px; }
+.about p { margin: 0 0 14px; max-width: 60ch; color: rgba(255,255,255,.92); }
+.areas { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.areas li { padding: 14px 16px; border: 1px solid rgba(255,255,255,.35); border-radius: 4px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; }
+.areas li > span { font-family: var(--mono); font-size: 13px; color: var(--cyan); }
+.areas b { font-family: var(--display); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .02em; }
+.areas small { display: block; color: rgba(255,255,255,.78); font-size: 13.5px; margin-top: 2px; }
+
+/* Diretoria */
+.team { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+.member { background: var(--surface); border: 1px solid var(--rule); padding: 18px; border-radius: 6px; }
+.member b { display: block; font-weight: 600; }
+.member span { font-size: 14px; color: var(--muted); }
+.member.todo b { color: var(--muted); font-weight: 500; }
+
+/* Contato */
+.contact-panel { padding: 22px; }
+.contact-panel .frame { grid-template-columns: 1.4fr 1fr; padding: 30px; align-items: center; }
+.contact-panel h2 { font-size: clamp(22px, 3vw, 30px); }
+.contact-panel p { margin: 10px 0 0; }
+.ig { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #0f6fc8; font-family: var(--display); font-weight: 800; font-size: 16px; padding: 14px 20px; border-radius: 999px; text-decoration: none; justify-self: start; }
+footer { padding: 28px 0 40px; font-size: 13px; color: var(--muted); }
+
+/* Leitura de uma pesquisa */
+#reader { display: none; padding: 36px 20px 64px; }
+body.reading #home { display: none; }
+body.reading #reader { display: block; }
+.reader-col { max-width: 700px; margin: 0 auto; }
+.back { display: inline-block; font-size: 14px; font-weight: 600; margin-bottom: 26px; text-decoration: none; }
+.reader-col .id { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.reader-col h1 { font-size: clamp(28px, 4.4vw, 40px); margin: 12px 0 12px; }
+.reader-col .authors { color: var(--muted); }
+.reader-col .meta-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 20px 0 30px; }
+.btn { font: inherit; font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--blue); background: var(--blue); color: #fff; cursor: pointer; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--accent); border-color: var(--accent); }
+.article { font-size: 18px; line-height: 1.75; }
+.article h2 { font-size: 20px; margin: 34px 0 10px; }
+.article p { margin: 0 0 16px; }
+.article .lead { font-size: 18px; color: var(--muted); border-left: 3px solid var(--cyan); padding-left: 16px; }
+.cite { margin-top: 36px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; }
+.topicos { margin: 0 0 18px; padding-left: 22px; }
+.topicos > li { margin-bottom: 10px; }
+.topicos ul { margin: 8px 0 0; padding-left: 20px; list-style: circle; }
+.topicos ul li { margin-bottom: 6px; }
+.pergunta { background: var(--accent-soft); border-radius: 6px; padding: 14px 18px; margin: 0 0 8px; }
+.pergunta b { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .05em; color: var(--accent); }
+.pergunta p { margin: 6px 0 0; font-size: 17px; }
+.refs { font-size: 14px; line-height: 1.6; padding-left: 22px; color: var(--muted); }
+.refs li { margin-bottom: 8px; overflow-wrap: anywhere; }
+.cite b { font-size: 12px; font-family: var(--mono); color: var(--muted); font-weight: 500; letter-spacing: .05em; }
+.cite p { margin: 8px 0 0; font-size: 15px; }
+.status { font-size: 13px; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .panel { padding: 14px; }
+  .frame, .contact-panel .frame { grid-template-columns: 1fr; gap: 24px; padding: 30px 20px 22px; }
+  .about { grid-template-columns: 1fr; gap: 28px; }
+  .paper { grid-template-columns: 1fr; gap: 6px; padding: 18px; }
+  .paper .id span { display: inline; margin-right: 10px; }
+  nav.main { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <img src="logo.png" alt="">
+      <div class="brand-name">Legal Tech League<small>FGV Direito Rio</small></div>
+    </a>
+    <nav class="main" aria-label="Seções">
+      <a href="#pesquisas">Pesquisas</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#diretoria">Diretoria</a>
+      <a href="#pesquisadores">Pesquisadores</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div id="home">
+  <div class="hero" id="inicio">
+    <div class="wrap">
+      <div class="panel">
+        <canvas id="net" aria-hidden="true"></canvas>
+        <div class="frame">
+          <div>
+            <h1>Liga acadêmica de estudos em direito e <span>tecnologia</span></h1>
+            <p>A Legal Tech League reúne alunos da FGV Direito Rio para estudar como a tecnologia transforma a prática jurídica, a regulação e o mercado. Produzimos pesquisas, promovemos eventos e visitas a escritórios e empresas, e aproximamos os membros do ecossistema de inovação.</p>
+            <span class="pill">Legal Tech League</span>
+          </div>
+          <div class="series">
+            <b>SÉRIE WORKING PAPERS LTL</b>
+            Cada pesquisa recebe um número na série (LTL-WP ano/nº) e uma referência pronta em ABNT, para ser citada em trabalhos acadêmicos.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="pesquisas">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Pesquisas <em>publicadas</em></h2>
+        <div class="count" id="count"></div>
+      </div>
+      <div class="filters">
+        <label for="q" class="sr">Buscar pesquisas</label>
+        <input id="q" type="search" placeholder="Buscar por título, autor ou tema">
+        <div class="chips" id="chips" role="group" aria-label="Filtrar por tema"></div>
+      </div>
+      <ul class="papers" id="papers"></ul>
+    </div>
+  </section>
+
+  <section class="dark-band" id="sobre">
+    <div class="wrap about">
+      <div>
+        <h2>Sobre a liga</h2>
+        <p>A Legal Tech League é uma liga acadêmica da FGV Direito Rio. Estudamos a interseção entre direito e tecnologia com dois objetivos: produzir pesquisa útil para o debate jurídico e aproximar os membros do mercado de inovação, com visitas a escritórios, empresas e eventos.</p>
+        <p>Os membros desenvolvem suas pesquisas de forma independente, cada um no tema que escolher dentro das linhas da liga. Os trabalhos concluídos passam por revisão interna antes de entrar na série de working papers.</p>
+      </div>
+      <ul class="areas" aria-label="Linhas de pesquisa">
+        <li><span>01</span><div><b>IA e regulação</b><small>PL 2338/2023, AI Act europeu e o uso de IA no trabalho jurídico</small></div></li>
+        <li><span>02</span><div><b>Infraestrutura digital</b><small>Data centers, incentivos fiscais e proteção de dados</small></div></li>
+        <li><span>03</span><div><b>Criptoativos e fintech</b><small>Regulação de ativos digitais e do mercado financeiro</small></div></li>
+        <li><span>04</span><div><b>Propriedade intelectual</b><small>Patentes, INPI e proteção da inovação</small></div></li>
+        <li><span>05</span><div><b>Startups e venture capital</b><small>Estruturação jurídica, investimento e empreendedorismo</small></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="diretoria">
+    <div class="wrap">
+      <div class="block-head"><h2>Diretoria 2026</h2></div>
+      <div class="team">
+        <div class="member"><b>Melissa Falcão</b><span>Presidente</span></div>
+        <div class="member"><b>Luana Gomes</b><span>Vice-presidente</span></div>
+        <div class="member"><b>Mateus Alves</b><span>Diretor Administrativo</span></div>
+        <div class="member"><b>João Paulo Donato</b><span>Diretor de Relações com o Mercado</span></div>
+        <div class="member"><b>Maria Flor Thomaz</b><span>Diretora de Marketing</span></div>
+        <div class="member"><b>Ana Julia Saraceni</b><span>Diretora de Pesquisa e Inovação</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="pesquisadores" style="padding-top:0">
+    <div class="wrap">
+      <div class="block-head"><h2>Pesquisadores</h2></div>
+      <div class="team" id="pesq"></div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap" style="padding-bottom:20px">
+      <div class="panel contact-panel">
+        <div class="frame">
+          <div>
+            <h2>Quer participar ou apoiar a liga?</h2>
+            <p>Escritórios, empresas e professores interessados em patrocinar, receber uma visita ou propor um tema de pesquisa podem falar com a diretoria pelo Instagram.</p>
+          </div>
+          <a class="ig" href="https://www.instagram.com/legaltechleague/" target="_blank" rel="noopener">@legaltechleague</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="reader" class="wrap" aria-live="polite"></div>
+</main>
+
+<footer>
+  <div class="wrap">Legal Tech League · FGV Direito Rio · Rio de Janeiro. As pesquisas expressam a opinião de seus autores.</div>
+</footer>
+
+<script>
+/* ============================================================
+   COMO PUBLICAR UMA NOVA PESQUISA
+   Copie um bloco { ... } abaixo e troque os campos.
+   - id: número na série, no formato "2026-05" (ano-número)
+   - pdf: link público para o PDF (Google Drive, por exemplo). Deixe "" se não houver.
+   - pergunta: pergunta de pesquisa (opcional)
+   - texto: seções. Cada seção tem um título e uma lista de parágrafos;
+     um parágrafo pode ser um texto ou {"lista": [...]} para tópicos.
+   - refs: referências bibliográficas
+   ============================================================ */
+const PESQUISAS = [
+ {
+  "id": "2026-04",
+  "data": "Outubro de 2026",
+  "titulo": "Tipos de patentes no INPI e suas especificidades",
+  "autores": [
+   "Davi Scovino"
+  ],
+  "temas": [
+   "Propriedade intelectual"
+  ],
+  "resumo": "Um guia das figuras de proteção por patente na Lei da Propriedade Industrial: patente de invenção, modelo de utilidade e certificado de adição, com requisitos, prazos e exemplos, além das matérias não patenteáveis e dos limites dos direitos do titular.",
+  "texto": [
+   {
+    "titulo": "Conceito de patente",
+    "paragrafos": [
+     {
+      "lista": [
+       "A patente é um título de propriedade temporária concedido pelo Estado ao titular de uma invenção ou modelo de utilidade, garantindo exclusividade de exploração nos termos da lei.",
+       "No Brasil, a concessão é realizada pelo Instituto Nacional da Propriedade Industrial (INPI).",
+       "A principal norma aplicável é a Lei nº 9.279/1996, conhecida como Lei da Propriedade Industrial (LPI).",
+       "As figuras relacionadas à proteção por patente são a Patente de Invenção (PI), a Patente de Modelo de Utilidade (MU) e o Certificado de Adição de Invenção (CA)."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Patente de Invenção (PI)",
+    "paragrafos": [
+     {
+      "lista": [
+       "Fundamento legal: arts. 8º, 11, 13 e 15 da LPI.",
+       "Protege uma nova solução técnica para determinado problema, podendo envolver um produto ou processo.",
+       {
+        "t": "Para ser patenteável, deve atender a três requisitos:",
+        "sub": [
+         "Novidade: não pode estar compreendida no estado da técnica.",
+         "Atividade inventiva: não pode decorrer de maneira evidente ou óbvia do conhecimento técnico existente.",
+         "Aplicação industrial: deve poder ser produzida ou utilizada em algum tipo de indústria."
+        ]
+       },
+       "Prazo de proteção: 20 anos contados da data do depósito, conforme o art. 40 da LPI.",
+       "Exemplo: um novo processo industrial para fabricar determinado medicamento, desde que cumpra os requisitos legais."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Patente de Modelo de Utilidade (MU)",
+    "paragrafos": [
+     {
+      "lista": [
+       "Fundamento legal: arts. 9º, 11, 14 e 15 da LPI.",
+       "Protege um objeto de uso prático que apresente nova forma ou disposição, resultando em melhoria funcional em seu uso ou fabricação.",
+       {
+        "t": "Exige:",
+        "sub": [
+         "Novidade;",
+         "Ato inventivo: a nova configuração não pode decorrer de maneira comum ou vulgar do estado da técnica;",
+         "Aplicação industrial."
+        ]
+       },
+       "Diferentemente da patente de invenção, o modelo de utilidade se concentra no aperfeiçoamento funcional de um objeto.",
+       "Prazo de proteção: 15 anos contados da data do depósito, conforme o art. 40 da LPI.",
+       "Exemplo: uma mesa com mecanismo inovador de regulagem de altura que melhore sua funcionalidade. O próprio INPI usa esse tipo de exemplo para explicar a modalidade."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Certificado de Adição de Invenção (CA)",
+    "paragrafos": [
+     {
+      "lista": [
+       "Fundamento legal: arts. 76 e 77 da LPI.",
+       "Protege um aperfeiçoamento ou desenvolvimento introduzido em uma invenção já patenteada, desde que relacionado ao mesmo conceito inventivo.",
+       "Não constitui uma patente independente, pois depende da patente principal.",
+       "Pode ser concedido mesmo quando o aperfeiçoamento não apresenta atividade inventiva própria, desde que atendidos os requisitos legais.",
+       "Prazo de proteção: acompanha o prazo restante da patente principal.",
+       "Exemplo: suponha que uma pessoa patenteie uma máquina e depois desenvolva um aperfeiçoamento relacionado ao mesmo conceito inventivo. Esse aperfeiçoamento poderá ser objeto de certificado de adição, se atender ao art. 76 da LPI."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Matérias não patenteáveis",
+    "paragrafos": [
+     {
+      "lista": [
+       "Art. 10 da LPI: estabelece matérias que não são consideradas invenção ou modelo de utilidade para fins de patente, como descobertas, teorias científicas, métodos matemáticos e determinadas criações abstratas.",
+       "Art. 18 da LPI: apresenta hipóteses de não patenteabilidade, incluindo invenções contrárias à moral, aos bons costumes, à segurança, à ordem e à saúde públicas, além de outras situações previstas na lei."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Direitos do titular e limites da proteção",
+    "paragrafos": [
+     {
+      "lista": [
+       "Art. 42 da LPI: garante ao titular o direito de impedir terceiros de produzir, usar, colocar à venda, vender ou importar o objeto patenteado sem seu consentimento, observadas as condições legais.",
+       "Art. 43 da LPI: prevê exceções aos direitos conferidos pela patente.",
+       "Art. 78 da LPI: estabelece hipóteses de extinção da patente, como o término do prazo de vigência e a renúncia, ressalvados os direitos de terceiros."
+      ]
+     }
+    ]
+   }
+  ],
+  "refs": [
+   "BRASIL. Lei nº 9.279, de 14 de maio de 1996. Regula direitos e obrigações relativos à propriedade industrial. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9279.htm.",
+   "INSTITUTO NACIONAL DA PROPRIEDADE INDUSTRIAL (INPI). Guia Básico de Patentes. Disponível em: https://www.gov.br/inpi/pt-br/servicos/patentes/guia-basico.",
+   "INSTITUTO NACIONAL DA PROPRIEDADE INDUSTRIAL (INPI). Perguntas frequentes — Patentes. Disponível em: https://www.gov.br/inpi/pt-br/acesso-a-informacao/perguntas-frequentes/patentes-1"
+  ],
+  "pdf": "",
+  "exemplo": false
+ },
+ {
+  "id": "2026-03",
+  "data": "Outubro de 2026",
+  "titulo": "Redata: incentivos fiscais para data centers e a infraestrutura da IA no Brasil",
+  "autores": [
+   "Larissa Novaes"
+  ],
+  "temas": [
+   "Infraestrutura digital",
+   "Tributário"
+  ],
+  "resumo": "Como funciona o Redata, regime criado pela Lei nº 15.504/2026: quais tributos federais são suspensos na compra de equipamentos para data centers, quais compromissos de mercado interno, energia, água e pesquisa as empresas assumem em troca, e o que ainda depende de regulamentação.",
+  "texto": [
+   {
+    "titulo": "O problema: dependência externa",
+    "paragrafos": [
+     {
+      "lista": [
+       {
+        "t": "Treinar e executar modelos de inteligência artificial exige data centers, instalações com servidores e chips que armazenam e processam dados. A Lei nº 15.504/2026 define esses serviços de forma ampla, incluindo computação em nuvem, processamento de alto desempenho e treinamento e inferência (a geração de respostas) de modelos de IA.",
+        "sub": [
+         "O debate parte da dependência externa. Segundo o Ministério da Fazenda, cerca de 60% dos dados e da IA usados no Brasil são processados no exterior.",
+         "O relator no Senado, Cid Gomes, advertiu que, sem data centers de alto desempenho no país, o Brasil corre o risco de depender de plataformas estrangeiras."
+        ]
+       },
+       {
+        "t": "Para atrair essa infraestrutura, o governo criou o Redata (Regime Especial de Tributação para Serviços de Datacenter), pela Lei nº 15.504, sancionada em 15 de setembro de 2026.",
+        "sub": [
+         "O regime nasceu na Medida Provisória 1.318/2025, que perdeu a validade sem ser votada. O conteúdo foi reapresentado como PL 278/2026, aprovado pela Câmara em fevereiro e pelo Senado em 1º de setembro."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "O incentivo",
+    "paragrafos": [
+     {
+      "lista": [
+       {
+        "t": "O incentivo é a suspensão de tributos federais sobre a compra de componentes eletrônicos e outros produtos de tecnologia da informação e comunicação destinados ao ativo imobilizado de data centers habilitados. Os tributos são o Imposto de Importação, o PIS/Cofins (inclusive na importação) e o IPI.",
+        "sub": [
+         "A suspensão vale apenas para os produtos listados em ato do Poder Executivo. No Imposto de Importação, alcança só itens sem produção nacional equivalente. No IPI, não vale para itens da lista também fabricados na Zona Franca de Manaus.",
+         "A suspensão vira alíquota zero quando a empresa cumpre os compromissos de sustentabilidade, energia, eficiência hídrica e pesquisa e o bem é incorporado ao seu ativo imobilizado.",
+         "Pela estimativa do governo, a renúncia fiscal é de cerca de R$ 5,2 bilhões em 2026 e R$ 1 bilhão em cada um dos dois anos seguintes. É uma estimativa, não um valor apurado."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Os compromissos",
+    "paragrafos": [
+     {
+      "lista": [
+       {
+        "t": "Em troca, a empresa habilitada assume, cumulativamente, os compromissos do art. 11-B da Lei nº 11.196/2005, incluído pela nova lei.",
+        "sub": [
+         "Mercado interno: oferecer ao menos 10% do fornecimento de processamento, armazenagem e tratamento de dados instalado com os benefícios, sem destinar essa cota à exportação ou ao uso próprio na ausência de demanda doméstica. Parte pode ser cedida sem ônus a instituições de ciência e tecnologia ou ao poder público, inclusive para fomentar startups, e a lei admite substituir o compromisso por investimento adicional de 10% em pesquisa e inovação.",
+         "Energia e água: atender toda a demanda elétrica com fontes renováveis ou de baixa emissão e manter Índice de Eficiência Hídrica (WUE) de até 0,05 litro por kWh, aferido anualmente.",
+         "Pesquisa: investir 2% do valor dos produtos adquiridos com o benefício em pesquisa, desenvolvimento e inovação ligados à economia digital, em parceria com instituições de ciência e tecnologia, de ensino e outras entidades previstas na lei.",
+         "Transparência: publicar relatório de sustentabilidade com o WUE e as fontes de energia utilizadas.",
+         "Regiões: quem se instalar no Norte, no Nordeste ou no Centro-Oeste tem os compromissos de mercado interno e de pesquisa reduzidos em 20%, o que, segundo a Agência Senado, leva os percentuais a 8% e 1,6%. Ao menos 40% dos recursos de pesquisa devem ir para essas regiões.",
+         "Condições de acesso: regularidade fiscal, ausência de registro no Cadin e não ser optante do Simples Nacional."
+        ]
+       },
+       {
+        "t": "As sanções dependem do compromisso descumprido.",
+        "sub": [
+         "Se a empresa descumprir os compromissos de sustentabilidade, energia, água ou pesquisa, deve recolher os tributos suspensos com juros e multa de mora.",
+         "Se descumprir a cota de mercado interno, perde os benefícios em novas aquisições. Sem correção em 180 dias após a notificação, a habilitação é cancelada, e a empresa e seu grupo econômico só podem voltar ao regime depois de dois anos."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "O que ainda falta",
+    "paragrafos": [
+     {
+      "lista": [
+       {
+        "t": "A lei já está em vigor, mas o regime ainda depende de regulamentação para funcionar.",
+        "sub": [
+         "O Executivo deve definir por regulamento, entre outros pontos, os procedimentos de habilitação, os indicadores de sustentabilidade e os prazos de comprovação. A habilitação caberá à Receita Federal.",
+         "Antes da sanção, o presidente-executivo da Brasscom, Affonso Nina, estimou cerca de 20 pontos pendentes de regulamentação infralegal e disse que, naquele momento, o regime ainda não era operacional.",
+         "Um dos pontos em aberto é o enquadramento das fontes de “baixa emissão”, em debate no setor de energia porque a redação pode abrir espaço para o gás natural.",
+         "A redução do ICMS sobre servidores e equipamentos, tributo estadual, depende de convênio aprovado no Confaz, e não do Redata.",
+         "A lei fixa vigência de cinco anos para os benefícios, mas os de PIS/Cofins (inclusive na importação) e IPI produzem efeitos só até 31 de dezembro de 2026, em razão da reforma tributária. O advogado Vinicius Penacho observa que o texto não cria expressamente tratamento equivalente para a CBS e o IBS, os novos tributos sobre o consumo."
+        ]
+       },
+       {
+        "t": "Expectativas e ressalvas sobre o resultado.",
+        "sub": [
+         "O vice-presidente Geraldo Alckmin afirmou que a lei deve atrair de R$ 500 bilhões a R$ 1 trilhão em investimentos. É uma projeção do governo.",
+         "Para Vinicius Penacho, especialista em direito digital, o Redata é uma política tributária relevante, mas ainda não uma política integrada de infraestrutura digital. Na avaliação dele, o impacto depende também de energia, acesso à transmissão e conexão com fibra óptica e cabos submarinos."
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Conclusão",
+    "paragrafos": [
+     "Na prática, o governo abre mão de receita federal nos primeiros anos, pela estimativa divulgada, em troca de capacidade instalada no país que reserve parte da oferta ao mercado brasileiro e cumpra metas de energia, água e pesquisa. Se isso se converte em investimento depende da regulamentação e de fatores que a lei não cobre, como energia, transmissão e conectividade."
+    ]
+   }
+  ],
+  "refs": [
+   "AGÊNCIA SENADO. Incentivo para instalação de data centers no Brasil é aprovado pelo Senado. Brasília, 1 set. 2026. Disponível em: https://www12.senado.leg.br/noticias/materias/2026/09/01/incentivo-para-instalacao-de-data-centers-no-brasil-e-aprovado-pelo-senado. Acesso em: 19 out. 2026.",
+   "AGÊNCIA SENADO. Sancionada lei de incentivo à instalação de data centers. Brasília, 16 set. 2026. Disponível em: https://www12.senado.leg.br/noticias/materias/2026/09/16/sancionada-lei-de-incentivo-para-a-instalacao-de-data-centers. Acesso em: 19 out. 2026.",
+   "BRASIL. Lei nº 15.504, de 15 de setembro de 2026. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/l15504.htm. Acesso em: 19 out. 2026.",
+   "EIXOS. Setor de data centers cobra rapidez na regulamentação do Redata. 8 set. 2026. Disponível em: https://eixos.com.br/politica/setor-de-data-centers-cobra-rapidez-na-regulamentacao-do-redata/. Acesso em: 19 out. 2026.",
+   "PODER360. Lula sanciona política para atrair data centers ao Brasil. 15 set. 2026. Disponível em: https://poder360.com.br/poder-governo/lula-sanciona-politica-para-atrair-data-centers-ao-brasil. Acesso em: 19 out. 2026."
+  ],
+  "pdf": "",
+  "exemplo": false
+ },
+ {
+  "id": "2026-02",
+  "data": "Outubro de 2026",
+  "titulo": "Gemini Agent: a nova IA do trabalho",
+  "autores": [
+   "Isabela Costa"
+  ],
+  "temas": [
+   "IA e regulação",
+   "Proteção de dados"
+  ],
+  "resumo": "O que é o Gemini Agent, anunciado pelo Google em outubro de 2026, como funcionam os agentes autônomos no ambiente corporativo e jurídico, e quais desafios de proteção de dados, sigilo profissional e governança eles trazem para o Direito.",
+  "texto": [
+   {
+    "titulo": "O lançamento",
+    "paragrafos": [
+     "O Gemini Agent foi anunciado oficialmente pela Alphabet e pelo Google Cloud no dia 8 de outubro de 2026, durante o evento corporativo Gemini at Work.",
+     "O desenvolvimento reflete a transição direta dos modelos de chatbots passivos para a chamada inteligência artificial agêntica (agentic AI), que possui autonomia para executar tarefas e tomar decisões sem a necessidade de intervenção humana contínua a cada etapa.",
+     "O lançamento inicial ocorreu em fase de prévia fechada (private preview) para organizações e parceiros corporativos do Google Cloud, com previsão de expansão progressiva para setores altamente regulados e o mercado amplo."
+    ]
+   },
+   {
+    "titulo": "Como funciona",
+    "paragrafos": [
+     "O sistema executa operações de maneira autônoma e contínua diretamente na infraestrutura de nuvem corporativa (cloud-native). A execução diretamente na nuvem garante que os processos continuem rodando em segundo plano mesmo quando o computador ou dispositivo móvel do usuário está desligado.",
+     "Durante o processamento, o sistema tem capacidade de criar subagentes virtuais especializados para dividir tarefas complexas e acelerar a entrega do resultado final.",
+     "A arquitetura apresenta alta interoperabilidade com ecossistemas e plataformas diversas de produtividade no mercado corporativo. Possui integração nativa com toda a suíte do Google Workspace, incluindo Gmail, Google Docs, Google Sheets, Google Agenda e Google Drive, e funciona de forma integrada com ferramentas de comunicação e produtividade de ecossistemas concorrentes, como Microsoft 365 e Slack.",
+     "O mecanismo de processamento utiliza tanto os modelos da família Gemini, do próprio Google, quanto modelos de terceiros, como o Claude, da Anthropic, permitindo a inclusão futura de novas arquiteturas de IA."
+    ]
+   },
+   {
+    "titulo": "Agentes corporativos",
+    "paragrafos": [
+     "O ecossistema permite a configuração de agentes corporativos especializados (coworker agents) para atuar diretamente no ambiente organizacional. As empresas podem criar agentes virtuais com identidades institucionais próprias e definir papéis operacionais específicos para cada um deles.",
+     "Os agentes virtuais recebem um endereço de e-mail corporativo próprio para enviar, receber e processar comunicados oficiais da organização."
+    ]
+   },
+   {
+    "titulo": "Uso no meio jurídico",
+    "paragrafos": [
+     "Foram disponibilizadas versões específicas e otimizadas para setores altamente especializados, como o meio jurídico e o mercado de serviços financeiros. O agente é treinado para realizar a leitura, análise e revisão textual de volumes expressivos de documentos em ritmo acelerado.",
+     "Na análise e auditoria de contratos, a ferramenta varre pastas inteiras armazenadas na nuvem, cruza dados com planilhas e sinaliza potenciais inconformidades jurídicas.",
+     "O uso dessas ferramentas reduz significativamente o tempo alocado em rotinas burocráticas e operacionais, permitindo que os profissionais atuem de forma mais estratégica na supervisão do conteúdo."
+    ]
+   },
+   {
+    "titulo": "Desafios para o Direito",
+    "paragrafos": [
+     "O avanço dos agentes autônomos impõe novos desafios regulatórios, éticos e teóricos para o campo do Direito e da Tecnologia.",
+     "A navegação autônoma por e-mails e arquivos corporativos exige a delimitação rigorosa das permissões de acesso para assegurar a conformidade com a Lei Geral de Proteção de Dados (LGPD) e o GDPR.",
+     "No âmbito da advocacia, é indispensável garantir a preservação do sigilo profissional e impedir o uso indevido de dados confidenciais de clientes no treinamento de modelos de terceiros.",
+     "A governança corporativa exige a implementação de trilhas de auditoria (audit trails) detalhadas que registrem todas as etapas e decisões tomadas pela inteligência artificial. A adoção de mecanismos de contenção (agent sandboxes) garante que ações de elevado risco financeiro ou jurídico dependam sempre da validação humana prévia (human-in-the-loop).",
+     "O impacto no mercado de trabalho suscita debates sobre a redefinição de funções operacionais de nível júnior e sobre a legalidade do monitoramento laboral e da delegação de ordens exercidos por sistemas automatizados."
+    ]
+   }
+  ],
+  "refs": [
+   "GOOGLE Cloud lança agente de IA para escritórios. Forbes Brasil, 8 out. 2026. Disponível em: https://forbes.com.br/forbes-tech/2026/10/google-cloud-lanca-agente-de-ia-para-escritorios/. Acesso em: 9 out. 2026.",
+   "GOOGLE lança agente de IA para tarefas de trabalho. G1, 8 out. 2026. Disponível em: https://g1.globo.com/tecnologia/noticia/2026/10/08/google-lanca-agente-de-ia-para-tarefas-de-trabalho.ghtml. Acesso em: 9 out. 2026.",
+   "GOOGLE lança agente do Gemini que trabalha sozinho entre vários apps. Canaltech, 9 out. 2026. Disponível em: https://canaltech.com.br/inteligencia-artificial/google-lanca-agente-do-gemini-que-trabalha-sozinho-entre-varios-apps/. Acesso em: 10 out. 2026.",
+   "GOOGLE lança o Gemini Agent, agente único de IA para tarefas de trabalho. iMasters, 9 out. 2026. Disponível em: https://imasters.com.br/noticia/google-lanca-o-gemini-agent-agente-unico-de-ia-para-tarefas-de-trabalho. Acesso em: 9 out. 2026.",
+   "GOOGLE reveals Gemini Agents — 'a single universal agent for work'. TechRadar Pro, 9 out. 2026. Disponível em: https://www.techradar.com/pro/google-reveals-gemini-agents-a-single-universal-agent-for-work-which-will-even-get-their-own-gmail-account. Acesso em: 9 out. 2026."
+  ],
+  "pdf": "",
+  "exemplo": false
+ },
+ {
+  "id": "2026-01",
+  "data": "Outubro de 2026",
+  "titulo": "Brasil x União Europeia: como o PL 2338/2023 se compara ao AI Act europeu",
+  "autores": [
+   "Antonio Terrinha"
+  ],
+  "temas": [
+   "IA e regulação"
+  ],
+  "resumo": "O PL 2338/2023 não é uma cópia do AI Act. Ele usa a mesma lógica de classificar a IA por risco, mas coloca os direitos das pessoas afetadas no centro e se apoia no direito civil brasileiro.",
+  "pergunta": "Como a proposta de lei brasileira (PL 2338/2023) sobre a regulamentação de Inteligência Artificial se compara ao AI Act europeu: em que se parecem, em que diferem e o que explica essas escolhas?",
+  "texto": [
+   {
+    "titulo": "Introdução",
+    "paragrafos": [
+     "No Brasil, uma comissão de juristas do Senado preparou o projeto, apresentado em maio de 2023 (ANPD/Unicamp). O Senado aprovou um substitutivo em 10 de dezembro de 2024 (Poder360). Desde março de 2025 o texto está na Câmara, e a votação deve ficar para depois das eleições de outubro de 2026 (Bairo Gonzalez). Na Europa, o AI Act vale desde agosto de 2024, com aplicação gradual. O Digital Omnibus adiou as regras de alto risco para dezembro de 2027 (Anexo III) e agosto de 2028 (Anexo I) (Orrick, 2026)."
+    ]
+   },
+   {
+    "titulo": "Semelhanças",
+    "paragrafos": [
+     "Os dois apresentam uma lógica semelhante de risco gradual: quanto maior o risco, mais obrigações e regulações. Ambos proíbem usos de risco inaceitável ou excessivo e exigem mais cuidado nos sistemas de alto risco, com documentação, registro das operações e avaliação de impacto. Também exigem transparência, como avisar a pessoa de que ela está falando com uma IA, e preveem ambientes de teste (sandboxes), uma autoridade fiscalizadora e multas (Freitas e Guilherme, ConJur, 2024; ITS Rio, 2024)."
+    ]
+   },
+   {
+    "titulo": "Diferenças",
+    "paragrafos": [
+     "A maior diferença é o foco. O AI Act regula o produto e seus riscos. O PL brasileiro também protege quem sofre os efeitos da IA, com um capítulo próprio de direitos: informação prévia, explicação, contestação, supervisão humana e não discriminação (ConJur). Isso faz do PL uma legislação mais completa.",
+     "Há outras diferenças. O AI Act tem quatro níveis de risco, enquanto o PL fala formalmente em dois, excessivo e alto (ConJur). Para definir o alto risco, o AI Act usa uma lista (Anexo III), e o PL define por finalidade e contexto de uso (art. 14), com a autoridade podendo atualizar a lista (Barbieri Advogados, 2026). Sobre responsabilidade civil, o AI Act não trata do tema, e o texto do Senado remete ao Código Civil e ao CDC (Barbieri Advogados, 2026).",
+     "Na fiscalização, a Europa conta com o AI Office e as autoridades nacionais, e o Brasil com o Sistema Nacional para Desenvolvimento, Regulação e Governança de Inteligência Artificial (SIA), coordenado pela ANPD (Agência Nacional de Proteção de Dados) (Meio & Mensagem, 2024). Nas multas, o AI Act usa um percentual do faturamento global, e o PL prevê até R$ 50 milhões ou 2% do faturamento do grupo, por infração (Poder360, 2024). O AI Act tem regras extras para modelos de IA de propósito geral com risco sistêmico, e o PL não trata disso (ConJur, sobre o relatório de 2024). Por fim, o PL é mais permissivo com biometria em tempo real, admitindo uso em inquérito com autorização judicial e na recaptura de foragidos (ConJur)."
+    ]
+   },
+   {
+    "titulo": "Contexto da criação",
+    "paragrafos": [
+     "A influência europeia é clara. O projeto se inspira no AI Act, mas também cita o projeto chileno e uma ferramenta canadense de avaliação de impacto (Data Privacy Brasil, 2024). Para o ConJur, o legislador repetiu o caminho da LGPD (Lei Geral de Proteção de Dados) em relação ao GDPR (Regulamento Geral sobre a Proteção de Dados), copiando de forma automática a legislação europeia sem pensar se existem opções melhores, e corre o risco de seguir o “Efeito Bruxelas” sem testar alternativas, como a regulação setorial.",
+     "Mesmo assim, houve também escolhas próprias: apoiar-se no Código Civil e no CDC em vez de criar um regime novo, usar a ANPD como coordenadora e incorporar os princípios do PL 21/2020 (ConJur). Mesmo sem menção explícita, isso pode ser um resultado do contexto brasileiro."
+    ]
+   },
+   {
+    "titulo": "Conclusão",
+    "paragrafos": [
+     "O PL é um híbrido. Herda do AI Act a estrutura de risco e a transparência, mas se afasta dele nos direitos das pessoas, na responsabilidade civil e na fiscalização pela ANPD (Mind Group, 2026). O texto europeu é mais detalhado. O brasileiro deixa mais para regulamentar depois, o que dá flexibilidade, mas reduz a segurança jurídica (ConJur)."
+    ]
+   }
+  ],
+  "refs": [
+   "FREITAS e GUILHERME. Regulação da IA: semelhanças e diferenças entre PL 2.338/2023 e EU AI Act. ConJur, 27 maio 2024.",
+   "BIONI, GARROTE e GUEDES. Temas centrais de regulação de IA. Data Privacy Brasil, 2024.",
+   "ITS RIO. Matriz comparada de obrigações: PL 2338/2023 vs. EU AI Act. 2024.",
+   "ANPD. Análise preliminar do PL 2338/2023. Jul. 2023.",
+   "PODER360. Senado aprova regulamentação da inteligência artificial; entenda. 10 dez. 2024.",
+   "MEIO & MENSAGEM. Regulamentação da IA no Brasil é aprovada pelo Senado. Dez. 2024.",
+   "BARBIERI ADVOGADOS. Regulamentação da inteligência artificial no Brasil: estado atual e perspectivas. 2026. Comparação com o AI Act: Brazil’s AI Act: PL 2.338/2023 vs. EU AI Act Comparison.",
+   "BAIRO GONZALEZ. Bill 2338/2023: where Brazil’s AI framework stands in 2026. Out. 2026.",
+   "MIND GROUP. PL 2.338 e governança de IA: como preparar sua empresa antes que a lei entre em vigor. Ago. 2026.",
+   "ORRICK. EU AI Act Update: Digital Omnibus Finalizes 8 Compliance Changes. Jul. 2026."
+  ],
+  "pdf": "",
+  "exemplo": false
+ }
+];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const linkify = t => esc(t).replace(/(https?:\/\/[^\s<]+?)(\.?)(?=\s|$)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>$2');
+function bloco(b) {
+  if (typeof b === "string") return `<p>${esc(b)}</p>`;
+  const item = i => typeof i === "string" ? `<li>${esc(i)}</li>` : `<li>${esc(i.t)}<ul>${i.sub.map(x => `<li>${esc(x)}</li>`).join("")}</ul></li>`;
+  return `<ul class="topicos">${b.lista.map(item).join("")}</ul>`;
+}
+const serie = p => "LTL-WP " + p.id.replace("-", "/");
+const ano = p => p.id.split("-")[0];
+
+function abnt(p) {
+  const nomes = p.autores.map(n => {
+    if (/confirmar/i.test(n)) return "[AUTORIA A CONFIRMAR]";
+    const partes = n.trim().split(/\s+/);
+    if (partes.length < 2) return n.toUpperCase();
+    const sobrenome = partes.pop();
+    return sobrenome.toUpperCase() + ", " + partes.join(" ");
+  });
+  const autores = nomes.length > 3 ? nomes[0] + " et al." : nomes.join("; ");
+  return autores + ". " + p.titulo + ". Working Paper " + serie(p) + ". Rio de Janeiro: Legal Tech League, FGV Direito Rio, " + ano(p) + ".";
+}
+
+let temaAtivo = null;
+const temas = [...new Set(PESQUISAS.flatMap(p => p.temas))].sort();
+
+function renderChips() {
+  const el = document.getElementById("chips");
+  el.innerHTML = temas.map(t => `<button class="chip" type="button" aria-pressed="${t === temaAtivo}" data-t="${esc(t)}">${esc(t)}</button>`).join("");
+  el.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+    temaAtivo = temaAtivo === b.dataset.t ? null : b.dataset.t;
+    renderChips(); renderLista();
+  }));
+}
+
+function renderLista() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const lista = PESQUISAS.filter(p => {
+    if (temaAtivo && !p.temas.includes(temaAtivo)) return false;
+    if (!q) return true;
+    return [p.titulo, p.resumo, p.autores.join(" "), p.temas.join(" ")].join(" ").toLowerCase().includes(q);
+  });
+  document.getElementById("count").textContent = lista.length + (lista.length === 1 ? " pesquisa" : " pesquisas");
+  const ul = document.getElementById("papers");
+  if (!lista.length) { ul.innerHTML = `<li class="empty">Nenhuma pesquisa encontrada. Tente outro termo ou limpe o filtro de tema.</li>`; return; }
+  ul.innerHTML = lista.map(p => `
+    <li class="paper">
+      <div class="id"><span>${serie(p)}</span><span>${esc(p.data)}</span></div>
+      <div>
+        <h3><a href="#wp-${p.id}">${esc(p.titulo)}</a>${p.exemplo ? '<span class="example">exemplo</span>' : ""}</h3>
+        <div class="authors">${p.autores.map(esc).join(", ")}</div>
+        <p class="abstract">${esc(p.resumo)}</p>
+        <div class="tags">${p.temas.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+      </div>
+    </li>`).join("");
+}
+
+function renderLeitura(p) {
+  const r = document.getElementById("reader");
+  r.innerHTML = `
+    <div class="reader-col">
+      <a class="back" href="#pesquisas">← Todas as pesquisas</a>
+      <div class="id">${serie(p)} · ${esc(p.data)}${p.exemplo ? '<span class="example">exemplo</span>' : ""}</div>
+      <h1>${esc(p.titulo)}</h1>
+      <div class="authors">${p.autores.map(esc).join(", ")}</div>
+      <div class="meta-row">
+        ${p.pdf ? `<a class="btn" href="${esc(p.pdf)}" target="_blank" rel="noopener">Abrir PDF</a>` : ""}
+        <button class="btn ghost" type="button" id="copiar">Copiar referência ABNT</button>
+        <span class="status" id="status" role="status"></span>
+      </div>
+      <div class="article">
+        <p class="lead">${esc(p.resumo)}</p>
+        ${p.pergunta ? `<div class="pergunta"><b>PERGUNTA DE PESQUISA</b><p>${esc(p.pergunta)}</p></div>` : ""}
+        ${p.texto.map(s => `<h2>${esc(s.titulo)}</h2>${s.paragrafos.map(bloco).join("")}`).join("")}
+        ${p.refs && p.refs.length ? `<h2>Referências</h2><ol class="refs">${p.refs.map(r => `<li>${linkify(r)}</li>`).join("")}</ol>` : ""}
+      </div>
+      <div class="cite"><b>COMO CITAR (ABNT)</b><p id="ref">${esc(abnt(p))}</p></div>
+    </div>`;
+  document.getElementById("copiar").addEventListener("click", async () => {
+    const st = document.getElementById("status");
+    try { await navigator.clipboard.writeText(abnt(p)); st.textContent = "Referência copiada."; }
+    catch (e) { st.textContent = "Não foi possível copiar. Selecione o texto abaixo e copie manualmente."; }
+  });
+}
+
+function rota() {
+  const h = location.hash.slice(1);
+  const p = h.startsWith("wp-") ? PESQUISAS.find(x => "wp-" + x.id === h) : null;
+  if (p) {
+    document.body.classList.add("reading");
+    renderLeitura(p);
+    window.scrollTo(0, 0);
+  } else {
+    const voltou = document.body.classList.contains("reading");
+    if (voltou) requestAnimationFrame(desenharRede);
+    const estavaLendo = document.body.classList.contains("reading");
+    document.body.classList.remove("reading");
+    if (estavaLendo && h) { const alvo = document.getElementById(h); if (alvo) alvo.scrollIntoView(); }
+  }
+}
+
+document.getElementById("q").addEventListener("input", renderLista);
+window.addEventListener("hashchange", rota);
+
+/* Malha de rede ao fundo dos blocos azuis, como nos posts */
+function desenharRede() {
+  document.querySelectorAll(".panel canvas").forEach(cv => {
+    const r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    cv.width = r.width * d; cv.height = r.height * d;
+    const c = cv.getContext("2d"); c.scale(d, d);
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const n = Math.round(r.width * r.height / 9000), pts = [];
+    for (let i = 0; i < n; i++) pts.push([rnd() * r.width, rnd() * r.height]);
+    c.strokeStyle = "rgba(255,255,255,.55)"; c.fillStyle = "#fff"; c.lineWidth = .7;
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      const dx = pts[i][0] - pts[j][0], dy = pts[i][1] - pts[j][1];
+      if (dx * dx + dy * dy < 120 * 120) { c.beginPath(); c.moveTo(pts[i][0], pts[i][1]); c.lineTo(pts[j][0], pts[j][1]); c.stroke(); }
+    }
+    pts.forEach(p => { c.beginPath(); c.arc(p[0], p[1], 1.6, 0, 7); c.fill(); });
+  });
+}
+window.addEventListener("resize", desenharRede);
+(function () {
+  const porAutor = {};
+  [...PESQUISAS].reverse().forEach(p => p.autores.forEach(a => (porAutor[a] = porAutor[a] || []).push(p)));
+  document.getElementById("pesq").innerHTML = Object.entries(porAutor).map(([a, ps]) =>
+    `<div class="member"><b>${esc(a)}</b>${ps.map(p => `<span style="display:block;margin-top:4px"><a href="#wp-${p.id}">${esc(p.titulo)}</a></span>`).join("")}</div>`).join("");
+})();
+renderChips(); renderLista(); rota(); desenharRede();
+</script>
+</body>
+</html>
